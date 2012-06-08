@@ -1,58 +1,55 @@
-define(['./lib/startAtomize', './component', './transactionAspect', 'when', 'aop'],
-function(startAtomize, component, createTransactionAspect, when, aop) {
+define({
 
-	// Main module that starts up atomize, creates an application component,
-	// and shows how it's methods can be wrapped in atomize transactional
-	// advice.
+	// Create a component instance
+	component: {
+		create: 'component',
+		// Call doInTransaction after component has been wired
+		ready: 'doInTransaction',
+		// Brute force add some around advice to log the
+		// value after a transaction completes
+		around: {
+			'doInTransaction': 'logAdvice'
+		}
+	},
 
-	var started, instance;
+	// Transactional Aspect for Atomize
+	// Very brute-force setup right now.  This could be
+	// made much more automatic
+	transactionAspect: {
+		create: {
+			module: 'lib/transactionAspect',
+			// Inject a reference to atomize itself
+			args: { $ref: 'atomize!' }
+		}
+	},
 
-	// Startup Atomize and bootstrap some shared data
-	started = startAtomize().then(bootstrapDataIfNecessary);
+	// Logging advice
+	logAdvice: {
+		create: {
+			module: 'lib/logAdvice',
+			// Inject a reference to the atomize root
+			args: { $ref: 'atomize!:root' }
+		}
+	},
 
-	// Some component instance whose methods we want to make transactional
-	instance = Object.create(component);
-
-	// Once atomize has started, and the data has been bootstrapped,
-	// call a method on the now-transaction-ified instance.
-	when(started, function(atomize) {
-		return instance.doInTransaction().then(
-			function() {
-				log('END: ' + atomize.root.thing);
-			}
-		);
-	});
-
-	function bootstrapDataIfNecessary(atomize) {
-		// Apply transactional advice to the instance's doInTransaction method,
-		// making it run within an atomize transaction
-		aop.add(instance, 'doInTransaction', createTransactionAspect(atomize));
-
-		// Return a new promise that will resolve once the data
-		// has been bootstrapped.
-		var bootstrapped = when.defer();
-		atomize.atomically(
-			function () {
-				// Bootstrap the shared data if necessary
-				if(!atomize.root.thing) {
-					atomize.root.thing = 0;
+	// wire plugins
+	plugins: [
+		// Debug -- see the browser console
+		{ module: 'wire/debug' },
+		// Quick and dirty atomize plugin for wire that starts atomize
+		// and provides access to an atomize instance and the shared root
+		// via a wire reference resolver (see usage of "atomize!" above)
+		{ module: 'lib/atomize-wire' },
+		// Do some pointcut aop to add transaction support to the
+		// doInTransaction method
+		{
+			module: 'wire/aop',
+			aspects: [
+				{
+					pointcut: /doInTransaction/,
+					advice: 'transactionAspect'
 				}
-
-				// Log the data that this client started with
-				log('START: ' + atomize.root.thing);
-			},
-			function() {
-				bootstrapped.resolve(atomize);
-			}
-		);
-
-		return bootstrapped.promise;
-	}
-
-	function log(message) {
-		var p = document.createElement('p');
-		p.innerHTML = message;
-		document.body.appendChild(p);
-	}
-
+			]
+		}
+	]
 });

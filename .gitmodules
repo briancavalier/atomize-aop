@@ -7,3 +7,6 @@
 [submodule "lib/curl"]
 	path = lib/curl
 	url = https://github.com/cujojs/curl
+[submodule "lib/wire"]
+	path = lib/wire
+	url = https://github.com/cujojs/wire

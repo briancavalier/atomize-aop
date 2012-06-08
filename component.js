@@ -9,7 +9,7 @@ define(function() {
 		 * @param data {Object} transactional data we care about
 		 */
 		doInTransaction: function(data) {
-			data.thing += 1;
+			data.thing = (data.thing||0) + 1;
 		}
 	};
 });
