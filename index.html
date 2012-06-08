@@ -2,11 +2,16 @@
 <html lang="en-US">
 <head>
 	<meta charset="UTF-8">
-	<title></title>
+	<title>Atomize AOP proof of concept</title>
+	<!-- AMD Loader -->
+	<script type="text/javascript" src="lib/curl/src/curl.js"></script>
+
+	<!-- Need sockjs for Atomize -->
 	<script type="text/javascript" src="lib/sockjs.js"></script>
+
+	<!-- Setup to be magically served by server.js via express -->
 	<script type="text/javascript" src="cereal.js"></script>
 	<script type="text/javascript" src="atomize.js"></script>
-	<script type="text/javascript" src="lib/curl/src/curl.js"></script>
 
 	<script type="text/javascript">
 		(function(g) {
