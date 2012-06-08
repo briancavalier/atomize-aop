@@ -5,13 +5,13 @@
 	<title></title>
 	<script type="text/javascript" src="lib/sockjs.js"></script>
 	<script type="text/javascript" src="lib/cereal/lib/cereal.js"></script>
-	<script type="text/javascript" src="lib/atomize/lib/compat.js"></script>
 	<script type="text/javascript" src="lib/atomize/lib/atomize.js"></script>
 	<script type="text/javascript" src="lib/curl/src/curl.js"></script>
 
 	<script type="text/javascript">
 		(function(g) {
 
+			// curl AMD loader config
 			var config = {
 				paths: {
 					curl: '../lib/curl/src/curl',
@@ -24,6 +24,7 @@
 				]
 			};
 
+			// Bootstrap the app by loading the main module
 			curl(config, ['main']);
 
 		})(window);

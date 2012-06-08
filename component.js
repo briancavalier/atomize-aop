@@ -1,7 +1,15 @@
 define(function() {
+	/**
+	 * Some simple application component that has methods that
+	 * need to run within a transaction
+	 */
 	return {
-		doInTransaction: function(root) {
-			root.thing = '' + (parseInt(root.thing) + 1);
+		/**
+		 * This method needs to run within a transaction
+		 * @param data {Object} transactional data we care about
+		 */
+		doInTransaction: function(data) {
+			data.thing += 1;
 		}
 	};
 });
