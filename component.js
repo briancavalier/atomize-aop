@@ -8,8 +8,9 @@ define(function() {
 		 * This method needs to run within a transaction
 		 * @param data {Object} transactional data we care about
 		 */
-		doInTransaction: function(data) {
-			data.thing = (data.thing||0) + 1;
+		updateValue: function(data) {
+			data.value = (data.value||0) + 1;
+			return data.value;
 		}
 	};
 });
