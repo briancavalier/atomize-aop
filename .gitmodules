@@ -1,6 +1,3 @@
-[submodule "lib/atomize"]
-	path = lib/atomize
-	url = https://github.com/briancavalier/atomize-client.git
 [submodule "lib/when"]
 	path = lib/when
 	url = https://github.com/cujojs/when
@@ -10,9 +7,3 @@
 [submodule "lib/curl"]
 	path = lib/curl
 	url = https://github.com/cujojs/curl
-[submodule "lib/sockjs"]
-	path = lib/sockjs
-	url = https://github.com/sockjs/sockjs-client
-[submodule "lib/cereal"]
-	path = lib/cereal
-	url = https://github.com/atomizejs/cereal
