@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html lang="en-US">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<script type="text/javascript" src="lib/sockjs.js"></script>
+	<script type="text/javascript" src="lib/cereal/lib/cereal.js"></script>
+	<script type="text/javascript" src="lib/atomize/lib/compat.js"></script>
+	<script type="text/javascript" src="lib/atomize/lib/atomize.js"></script>
+	<script type="text/javascript" src="lib/curl/src/curl.js"></script>
+
+	<script type="text/javascript">
+		(function(g) {
+
+			var config = {
+				paths: {
+					curl: '../lib/curl/src/curl',
+					// Using a modified version of aop.js
+					aop: 'lib/aop'
+				},
+				pluginPath: 'curl/plugin',
+				packages: [
+					{ name: 'when', location: 'lib/when', main: 'when' }
+				]
+			};
+
+			curl(config, ['main']);
+
+		})(window);
+	</script>
+</head>
+<body>
+
+</body>
+</html>
