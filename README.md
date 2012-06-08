@@ -4,3 +4,6 @@
 1. `npm install atomize-server`
 1. `sh bin/server`
 1. Point several browser tabs at index.html.  Watch the numbers and the browser console.  Reload tabs at will.
+	* **IMPORTANT** You have to use a browser that supports ES Harmony Proxies.  Currently, that includes:
+		* Firefox 12
+		* Chrome 19 but you have to enable it in chrome://flags - Look for "Experimental Javascript", or start chrome on the command line with `--harmony`
