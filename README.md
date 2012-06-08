@@ -1,4 +1,4 @@
-1. Clone the repo to a *web server accessible dir* (AMD loaders don't work with file:// urls)
+1. Clone the repo
 1. cd <repo dir>
 1. `git submodule init && git submodule update`
 1. `npm install atomize-server express`
