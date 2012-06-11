@@ -1,23 +1,23 @@
 define({
 
 	// Create a component instance
-	component: {
+	controller: {
 		create: 'component',
-
-		// Call updateValue after component has been wired
-		ready: 'updateValue',
+		properties: {
+			node: { $ref: 'dom.first!.value', at: 'view' }
+		},
 
 		// Setup transactional methods using a simple regex match
-		transactional: /updateValue/,
-
-		// Brute force add some around advice to render the result
-		// of the transaction
-		afterResolving: {
-			'updateValue': 'renderResult'
+		transactional: /incrementValue/,
+		// Observe the 'value' field of atomize.root.  When it
+		// changes, invoke renderValue
+		observe: {
+			value: 'renderValue'
 		},
+
 		// Connect a click handler to the button (see view below)
 		on: {
-			view: { 'click:button': 'updateValue' }
+			view: { 'click:button': 'incrementValue' }
 		}
 	},
 
@@ -25,16 +25,7 @@ define({
 	// useful into the DOM
 	view: {
 		render: '<div><p>Value: <span class="value"></span></p><button>+1</button></div>',
-		insert: { first: { $ref: 'dom.first!body'} },
-	},
-
-	// Logging advice
-	renderResult: {
-		create: {
-			module: 'renderResult',
-			// Inject a reference to the atomize-managed data we want to log
-			args: { $ref: 'dom.first!.value', at: 'view' }
-		}
+		insert: { first: { $ref: 'dom.first!body'} }
 	},
 
 	// wire plugins

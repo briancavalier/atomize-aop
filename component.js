@@ -8,9 +8,16 @@ define(function() {
 		 * This method needs to run within a transaction
 		 * @param data {Object} transactional data we care about
 		 */
-		updateValue: function(data) {
+		incrementValue: function(data) {
 			data.value = (data.value||0) + 1;
-			return data.value;
+		},
+
+		/**
+		 * When the value changes, this method renders it
+		 * @param value
+		 */
+		renderValue: function(value) {
+			this.node.innerHTML = value;
 		}
 	};
 });
