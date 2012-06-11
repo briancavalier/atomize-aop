@@ -17,7 +17,7 @@ define(function() {
 		 * @param value
 		 */
 		renderValue: function(value) {
-			this.node.innerHTML = value;
+			this.node.innerHTML = value||0;
 		}
 	};
 });
