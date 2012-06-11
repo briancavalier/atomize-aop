@@ -4,37 +4,16 @@
 	<meta charset="UTF-8">
 	<title>Atomize AOP proof of concept</title>
 	<!-- AMD Loader -->
-	<script type="text/javascript" src="lib/curl/src/curl.js"></script>
+	<script src="lib/curl/src/curl.js"></script>
 
 	<!-- Need sockjs for Atomize -->
-	<script type="text/javascript" src="lib/sockjs.js"></script>
+	<script src="lib/sockjs.js"></script>
 
 	<!-- Setup to be magically served by server.js via express -->
-	<script type="text/javascript" src="cereal.js"></script>
-	<script type="text/javascript" src="atomize.js"></script>
+	<script src="cereal.js"></script>
+	<script src="atomize.js"></script>
 
-	<script type="text/javascript">
-		(function(g) {
-
-			// curl AMD loader config
-			var config = {
-				paths: {
-					curl: '../lib/curl/src/curl',
-					// Using a modified version of aop.js
-					aop: 'lib/aop'
-				},
-				pluginPath: 'curl/plugin',
-				packages: [
-					{ name: 'wire', location: 'lib/wire', main: 'wire' },
-					{ name: 'when', location: 'lib/when', main: 'when' }
-				]
-			};
-
-			// Bootstrap the app by loading the main module
-			curl(config, ['wire!main']);
-
-		})(window);
-	</script>
+	<script src="app/boot.js"></script>
 </head>
 <body>
 

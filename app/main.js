@@ -2,7 +2,7 @@ define({
 
 	// Create a component instance
 	controller: {
-		create: 'component',
+		create: 'app/controller',
 		properties: {
 			node: { $ref: 'dom.first!.value', at: 'view' }
 		},
