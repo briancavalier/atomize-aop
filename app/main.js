@@ -7,8 +7,13 @@ define({
 			node: { $ref: 'dom.first!.value', at: 'view' }
 		},
 
-		// Setup transactional methods using a simple regex match
-		transactional: /incrementValue/,
+		// Exploring the possibilities.  Mark a method as updating
+		// a particular part of atomize.root.  Whatever the return
+		// value of this method is will be assigned to that part of
+		// atomize.root
+		update: {
+			value: 'incrementValue'
+		},
 		// Observe the 'value' field of atomize.root.  When it
 		// changes, invoke renderValue
 		observe: {
@@ -38,8 +43,6 @@ define({
 		// Quick and dirty atomize plugin for wire that starts atomize
 		// and provides access to an atomize instance and the shared root
 		// via a wire reference resolver (see usage of "atomize!" above)
-		{ module: 'lib/atomize-wire', logging: true },
-		// Bring in wire/aop for afterResolving advice
-		{ module: 'wire/aop' }
+		{ module: 'lib/atomize-wire', logging: true }
 	]
 });

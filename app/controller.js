@@ -8,8 +8,8 @@ define(function() {
 		 * This method needs to run within a transaction
 		 * @param data {Object} transactional data we care about
 		 */
-		incrementValue: function(data) {
-			data.value = (data.value||0) + 1;
+		incrementValue: function(value) {
+			return (value||0) + 1;
 		},
 
 		/**
